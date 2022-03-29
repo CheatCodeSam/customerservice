@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ManufacturerController;
-use App\Http\Controllers\EquipmentController;
-use App\Http\Controllers\InvoiceController;
+// use App\Http\Controllers\CustomerController;
+// use App\Http\Controllers\ManufacturerController;
+// use App\Http\Controllers\EquipmentController;
+// use App\Http\Controllers\InvoiceController;
 
 
 
@@ -19,14 +19,27 @@ use App\Http\Controllers\InvoiceController;
 |
 */
 
-Route::resource('/customer', CustomerController::class);
-Route::resource('/manufacturer', ManufacturerController::class);
-Route::resource('/equipment', EquipmentController::class);
-Route::resource('/invoice', InvoiceController::class);
+// Route::resource('/customer', CustomerController::class);
+// Route::resource('/manufacturer', ManufacturerController::class);
+// Route::resource('/equipment', EquipmentController::class);
+// Route::resource('/invoice', InvoiceController::class);
 
+Route::get('/db-migrate', function () {
+    Artisan::call('migrate');
+    echo Artisan::output();
+});
 
+Route::get('/db-test', function () {
+    try {
+         echo \DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+          echo 'None';
+    }
+});
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+URL::forceScheme('https');
